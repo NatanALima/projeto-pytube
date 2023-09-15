@@ -108,3 +108,4 @@ from classes.OsCommands import OsCommands
 
 osCmd = OsCommands();
 path = osCmd.setPath(r"E:\ambiente_teste");
+print(path);
