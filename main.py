@@ -106,6 +106,51 @@
 
 from classes.OsCommands import OsCommands
 
+
+def questionMessage(question, msg=None):
+    if msg is not None:
+        print(msg);
+    answer = input(question).upper();
+    return 1 if answer == "Y" else 0;
+
+
+# Criar um looping para ocorrer enquanto (while) o diretório for incorreto!
+
+
+# Adicionar verificação para a criação de pasta + looping em caso de erro
+
 osCmd = OsCommands();
-path = osCmd.setPath(r"E:\ambiente_teste");
+
+
+def pathSelect():
+    while True:
+        pathLocal = str(input('Informe o diretório:'));
+        if osCmd.setPath(pathLocal):
+            pathLocal = osCmd.path;
+            break;
+        else:
+            print('Diretório não existe. Tente Novamente!');
+    return pathLocal;
+
+
+def createFolderAndSelect():
+    while True:
+        pathParent = str(input('Informe o diretório Pai: '));
+        folderName = str(input('Informe o nome da pasta: '));
+        if osCmd.createNewFolder(pathParent, folderName):
+            print('Pasta Criada e Selecionada com Sucesso!');
+            pathLocal = osCmd.path;
+            break;
+        else:
+            answer = questionMessage('Tentar novamente? (y/n): ', 'Pasta já Existe!')
+            if not answer:
+                print('Criação de Pasta cancelada... ')
+                print('Ainda é necessário selecionar o caminho...');
+                pathLocal = pathSelect();
+                break;
+    return pathLocal;
+
+
+path = createFolderAndSelect();
+
 print(path);

@@ -29,23 +29,22 @@ class OsCommands:
         return isCreated;
 
     def createNewFolder(self, path, folder):
-        while True:
-            if self.verifyCreateFolder(path, folder):
-                print('Pasta Criada com Sucesso!');
-                break;
-            else:
-                print('Não foi possível Criar a pasta. Ela já existe!')
-                time.sleep(1);
-                print('--------------');
-                question = questionMessage('Deseja Continuar? (y/n)');
-                if not question == "Y":
-                    print('Criação de nova pasta Cancelada');
-                    break;
+        wasCreated = 0;
+        if self.verifyCreateFolder(path, folder):
+            wasCreated = 1;
+        else:
+            wasCreated = 0;
+        return wasCreated;
 
     def setPath(self, path):
-        self.path = path;
-        isCreateNewFolder = questionMessage('Deseja Criar uma Nova Pasta? (y/n)', f'Seu caminho atual é {path}');
-        if isCreateNewFolder:
-            self.folder = str(input('Informe o nome da pasta que deseja criar: '));
-            self.createNewFolder(path, self.folder);
-        return self.path;
+        dirFind = 0;
+        if os.path.isdir(path):
+            self.path = path;
+            dirFind = 1;
+        else:
+            dirFind = 0;
+        return dirFind
+        # isCreateNewFolder = questionMessage('Deseja Criar uma Nova Pasta? (y/n)', f'Seu caminho atual é {path}');
+        # if isCreateNewFolder:
+        #     self.folder = str(input('Informe o nome da pasta que deseja criar: '));
+        #     self.createNewFolder(path, self.folder);
