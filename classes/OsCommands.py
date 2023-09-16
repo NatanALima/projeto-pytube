@@ -1,13 +1,5 @@
 import errno
 import os
-import time
-
-
-def questionMessage(question, msg=None):
-    if msg is not None:
-        print(msg);
-    answer = input(question).upper();
-    return 1 if answer == "Y" else 0;
 
 
 class OsCommands:
@@ -44,7 +36,4 @@ class OsCommands:
         else:
             dirFind = 0;
         return dirFind
-        # isCreateNewFolder = questionMessage('Deseja Criar uma Nova Pasta? (y/n)', f'Seu caminho atual é {path}');
-        # if isCreateNewFolder:
-        #     self.folder = str(input('Informe o nome da pasta que deseja criar: '));
-        #     self.createNewFolder(path, self.folder);
+
